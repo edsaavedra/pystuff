@@ -45,8 +45,8 @@ def logIn():
     driver.get('https://sso.teachable.com/secure/146684/users/sign_in?clean_login=true&reset_purchase_session=1')
     try:
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_email")))
-        driver.find_element_by_id('user_email').send_keys('eduardosaavedram@live.com')
-        driver.find_element_by_id('user_password').send_keys('eds1016')
+        driver.find_element_by_id('user_email').send_keys('')
+        driver.find_element_by_id('user_password').send_keys('')
         driver.find_element_by_css_selector('.btn-md.login-button').click()
         geturls()
     finally:
