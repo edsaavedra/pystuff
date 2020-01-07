@@ -1,0 +1,1 @@
+"0 - Getting Started", "1 - The Big O Notation", "2 - Arrays", "3 - Linked Lists", "4 - Stacks", "5 - Queues", "6 - Hash Tables" | % {New-Item -Name ".\$_" -ItemType 'Directory'}

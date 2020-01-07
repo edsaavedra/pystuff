@@ -3,11 +3,11 @@ const Path = require("path");
 const Axios = require("axios");
 let urls;
 
-fs.readFile("./test.json", 'utf8', function(err, data) {
+fs.readFile("./Python Programming for Developers.json", 'utf8', function(err, data) {
     if (err) throw err;
     urls = JSON.parse(data);
     Object.keys(urls).forEach(function(i) {
-        download(urls[i], Path.resolve(__dirname, './', i + '.mp4'))
+        download(urls[i], Path.resolve(__dirname, './vids/', i + '.mp4'))
             .then(data => console.info('finished: ', i))
             .catch(err => console.info(err))
     })

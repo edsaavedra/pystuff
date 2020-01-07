@@ -26,7 +26,7 @@ def downloadVids(videoUrl, name):
     urllib.request.urlretrieve(videoUrl, name, show_progress)
 
 def geturls():
-    driver.get('https://codewithmosh.com/courses/293204/lectures/4509750')
+    driver.get('')
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'download')))
     for course in driver.find_elements_by_css_selector('.section-list a.item'):
         try:
@@ -42,7 +42,7 @@ def geturls():
             pass
 
 def logIn():
-    driver.get('https://sso.teachable.com/secure/146684/users/sign_in?clean_login=true&reset_purchase_session=1')
+    driver.get('')
     try:
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_email")))
         driver.find_element_by_id('user_email').send_keys('')
