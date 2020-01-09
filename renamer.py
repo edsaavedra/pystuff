@@ -3,7 +3,7 @@ import re
 
 def main():
 	i = 0
-	path = "D:/Downloads/Deving/Mosh/Objec Oriented Programing/6 - ES6 Tooling"
+	path = "vids/mastering react/5 - Pagination, Filtering, and Sorting"
 	for filename in os.listdir(path):
 		print(re.sub(r'^\d+ - ', '', filename))
 		src = path + '/' + filename

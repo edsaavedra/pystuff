@@ -18,26 +18,22 @@ async function download(url, path) {
     });
 }
 
-fs.readFile("./Mastering React.json", 'utf8', function(err, data) {
+fs.readFile("./8 - Python Programming for Developers.json", 'utf8', function(err, data) {
     if (err) throw err;
     urls = JSON.parse(data);
     let idx = 0;
-/*     async.each(urls, function(i) {
-        let k = Object.keys(urls)[idx];
-        idx++;
-        download(i, Path.resolve(__dirname, './vids/', k + '.mp4'))
-            .then(data => console.info('finished: ', k))
-            .catch(err => console.info(err));
-    }); */
+
     async.mapLimit(urls, 5, async function(i) {
         let k = Object.keys(urls)[idx];
         idx++;
-        return download(i, Path.resolve(__dirname, './vids/', k + '.mp4'))
-            .then(data => console.info('finished: ', k))
-            .catch(err => console.info(err));
+        let path = k + '.mp4';
+        if (!fs.existsSync(path)) {
+            return download(i, Path.resolve(__dirname, './vids/', path))
+                .then(data => console.info('finished: ', k))
+                .catch(err => console.info(err));
+        }
     }, (err, results) => {
         if (err) throw err
-        // results is now an array of the response bodies
         console.log(results)
     })
 });
