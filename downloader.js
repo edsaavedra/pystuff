@@ -3,6 +3,11 @@ const Axios = require("axios");
 const fs = require("fs");
 const Path = require("path");
 let urls;
+let paths = [];
+
+fs.readdirSync('./').forEach(file => {
+  if (file.match(/^\d.+(\.json)/g)) paths.push(file);
+});
 
 async function download(url, path) {
     const response = await Axios({
@@ -18,22 +23,23 @@ async function download(url, path) {
     });
 }
 
-fs.readFile("./8 - Python Programming for Developers.json", 'utf8', function(err, data) {
-    if (err) throw err;
-    urls = JSON.parse(data);
-    let idx = 0;
+for (dir in paths) {
+    const cu = "./" + paths[dir];
+    console.info('%c 💩 ', 'background: #ffbf27', cu);
+    fs.readFile(cu, 'utf8', function(err, data) {
+        if (err) throw err;
+        urls = JSON.parse(data);
+        let idx = 0;
 
-    async.mapLimit(urls, 5, async function(i) {
-        let k = Object.keys(urls)[idx];
-        idx++;
-        let path = k + '.mp4';
-        if (!fs.existsSync(path)) {
-            return download(i, Path.resolve(__dirname, './vids/', path))
+        async.mapLimit(urls, 8, async function(i) {
+            let k = Object.keys(urls)[idx];
+            idx++;
+            let path = k + '.mp4';
+            return download(i, Path.resolve(__dirname, cu.replace('.json', ''), path))
                 .then(data => console.info('finished: ', k))
-                .catch(err => console.info(err));
-        }
-    }, (err, results) => {
-        if (err) throw err
-        console.log(results)
-    })
-});
+                .catch(err => console.info(err, '⚡'));
+        }, (err, results) => {
+            if (err) throw err
+        })
+    });
+}
