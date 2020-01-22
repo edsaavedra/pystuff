@@ -28,8 +28,7 @@ async function download(url, path) {
 
 for (dir in paths) {
     const cu = "./" + paths[dir];
-    console.info('%c 💩 ', 'background: #ffbf27', cu);
-/*     fs.readFile(cu, 'utf8', function(err, data) {
+    fs.readFile(cu, 'utf8', function(err, data) {
         if (err) throw err;
         urls = JSON.parse(data);
         let idx = 0;
@@ -38,11 +37,11 @@ for (dir in paths) {
             let k = Object.keys(urls)[idx];
             idx++;
             let path = k + '.mp4';
-            return download(i, Path.resolve(__dirname, cu.replace('.json', ''), path))
+            return download(i, Path.resolve(__dirname, cu.replace('.json', '/'), path))
                 .then(data => console.info('finished: ', k))
                 .catch(err => console.info(err, '⚡'));
         }, (err, results) => {
             if (err) throw err
         })
-    }); */
+    });
 }
