@@ -6,7 +6,10 @@ let urls;
 let paths = [];
 
 fs.readdirSync('./').forEach(file => {
-  if (file.match(/^\d.+(\.json)/g)) paths.push(file);
+    if (file.match(/^\d.+(\.json)/g)){
+        paths.push(file);
+        fs.mkdirSync(file.replace('.json', ''));
+    };
 });
 
 async function download(url, path) {
@@ -26,12 +29,12 @@ async function download(url, path) {
 for (dir in paths) {
     const cu = "./" + paths[dir];
     console.info('%c 💩 ', 'background: #ffbf27', cu);
-    fs.readFile(cu, 'utf8', function(err, data) {
+/*     fs.readFile(cu, 'utf8', function(err, data) {
         if (err) throw err;
         urls = JSON.parse(data);
         let idx = 0;
 
-        async.mapLimit(urls, 8, async function(i) {
+        async.mapLimit(urls, 5, async function(i) {
             let k = Object.keys(urls)[idx];
             idx++;
             let path = k + '.mp4';
@@ -41,5 +44,5 @@ for (dir in paths) {
         }, (err, results) => {
             if (err) throw err
         })
-    });
+    }); */
 }
